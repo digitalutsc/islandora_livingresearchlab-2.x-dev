@@ -33,7 +33,7 @@
       </actions>
     </properties>
     <children>
-      <element name="DarwinRecordSet">
+      <element name="dwc_fields_protocol">
         <properties>
           <type>fieldset</type>
           <access>TRUE</access>
@@ -179,7 +179,7 @@
                       <schema/>
                       <type>xml</type>
                       <prefix>NULL</prefix>
-                      <value>&lt;dcterms:type&gt;Text&lt;/dcterms:type&gt;</value>
+                      <value>&lt;dcterms:type&gt;Protocol&lt;/dcterms:type&gt;</value>
                     </create>
                     <read>
                       <path>/dwr:DarwinRecordSet/dwc:Occurrence/dcterms:type</path>

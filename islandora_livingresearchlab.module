@@ -41,11 +41,6 @@ function islandora_livingresearchlab_theme($existing, $type, $theme, $path) {
       'variables' => array('islandora_object' => NULL),
     ),
 
-    'lrl_birth' => array(
-      'template' => 'theme/islandora-birth',
-      'pattern' => 'lrl_birth__',
-      'variables' => array('islandora_object' => NULL),
-      ),
 
     'lrl_datasession' => array(
       'template' => 'theme/islandora-datasession',
@@ -65,17 +60,17 @@ function islandora_livingresearchlab_theme($existing, $type, $theme, $path) {
       'variables' => array('islandora_object' => NULL),
       ),
 
-    'lrl_protocol' => array(
-      'template' => 'theme/islandora-protocol',
-      'pattern' => 'lrl_protocol__',
-      'variables' => array('islandora_object' => NULL),
-      ),
+    // 'lrl_protocol' => array(
+    //   'template' => 'theme/islandora-protocol',
+    //   'pattern' => 'lrl_protocol__',
+    //   'variables' => array('islandora_object' => NULL),
+    //   ),
 
-    'lrl_publication' => array(
-      'template' => 'theme/islandora-publication',
-      'pattern' => 'lrl_publication__',
-      'variables' => array('islandora_object' => NULL),
-    ),
+    // 'lrl_publication' => array(
+    //   'template' => 'theme/islandora-publication',
+    //   'pattern' => 'lrl_publication__',
+    //   'variables' => array('islandora_object' => NULL),
+    // ),
   );
 }
 
@@ -104,10 +99,7 @@ function islandora_livingresearchlab_islandora_livingresearchlab_islandora_view_
   return array('' => $output);
 }
 
-function islandora_livingresearchlab_islandora_livingresearchlab_birthCModel_islandora_view_object($object) {
-  $output = theme('lrl_birth', array('islandora_object' => $object));
-  return array('' => $output);
-}
+
 
 function islandora_livingresearchlab_islandora_livingresearchlab_datasessionCModel_islandora_view_object($object) {
   $output = theme('lrl_datasession', array('islandora_object' => $object));
@@ -124,15 +116,15 @@ function islandora_livingresearchlab_islandora_livingresearchlab_mouseCModel_isl
   return array('' => $output);
 }
 
-function islandora_livingresearchlab_islandora_livingresearchlab_protocolCModel_islandora_view_object($object) {
-  $output = theme('lrl_procotol', array('islandora_object' => $object));
-  return array('' => $output);
-}
+// function islandora_livingresearchlab_islandora_livingresearchlab_protocolCModel_islandora_view_object($object) {
+//   $output = theme('lrl_procotol', array('islandora_object' => $object));
+//   return array('' => $output);
+// }
 
-function islandora_livingresearchlab_islandora_livingresearchlab_publicationCModel_islandora_view_object($object) {
-  $output = theme('lrl_publication', array('islandora_object' => $object));
-  return array('' => $output);
-}
+// function islandora_livingresearchlab_islandora_livingresearchlab_publicationCModel_islandora_view_object($object) {
+//   $output = theme('lrl_publication', array('islandora_object' => $object));
+//   return array('' => $output);
+// }
 
 
 /**
@@ -177,9 +169,7 @@ function islandora_livingresearchlab_islandora_xml_form_builder_forms() {
   $module_path = drupal_get_path('module', 'islandora_livingresearchlab');
   
   return array(
-    'DSU Birth DwC' => array(
-      'form_file' => "$module_path/xml/forms/Birth_dwc.xml",
-    ),
+    
     'DSU Data Session DwC' => array(
       'form_file' => "$module_path/xml/forms/DataSession_dwc.xml",
     ),
@@ -204,8 +194,9 @@ function islandora_livingresearchlab_islandora_xml_form_builder_forms() {
 
 function islandora_livingresearchlab_xml_form_builder_get_self_transforms() {
   $module_path = drupal_get_path('module', 'islandora_livingresearchlab');
-   return array('dwcclassoccurrence2dc.xsl' => "$module_path/xsl/dwcclassoccurrence2dc.xsl", 
-    'mods_to_dc.xsl' => "$module_path/xsl/mods_to_dc.xsl");
+   return array('dwcclassoccurrence2dc.xsl' => "$module_path/xsl/dwcclassoccurrence2dc.xsl",
+    'mods_to_dc.xsl' => "$module_path/xsl/mods_to_dc.xsl", 
+    'cleanup_mods.xsl' => "$module_path/xsl/cleanup_mods.xsl");
 }
 
 
@@ -220,20 +211,14 @@ function islandora_livingresearchlab_islandora_content_model_forms_form_associat
   $module_path = drupal_get_path('module', 'islandora_livingresearchlab');
   
   return array(
-    'islandora_livingresearchlab_birth_dwc_form' => array(
-      'content_model' => 'islandora:livingresearchlab_birthCModel',
-      'form_name' => 'DSU Birth DwC',
-      'dsid' => 'DWC',
-      'title_field' => array('DarwinRecordSet', 'occurrence', 'occurrenceid'),
-      'transform' => 'dwcclassoccurrence2dc.xsl',
-      'template' => FALSE,
-    ),
+
     'islandora_livingresearchlab_datasession_dwc_form' => array(
       'content_model' => 'islandora:livingresearchlab_datasessionCModel',
       'form_name' => 'DSU Data Session DwC',
       'dsid' => 'DWC',
       'title_field' => array('DarwinRecordSet', 'event', 'collectiondate'),
       'transform' => 'dwcclassoccurrence2dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
       'template' => FALSE,
     ),
     'islandora_livingresearchlab_experiment_dwc_form' => array(
@@ -242,6 +227,7 @@ function islandora_livingresearchlab_islandora_content_model_forms_form_associat
       'dsid' => 'DWC',
       'title_field' => array('DarwinRecordSet', 'occurrence', 'occurrenceid'),
       'transform' => 'dwcclassoccurrence2dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
       'template' => FALSE,
     ),
     'islandora_livingresearchlab_mouse_dwc_form' => array(
@@ -250,14 +236,16 @@ function islandora_livingresearchlab_islandora_content_model_forms_form_associat
       'dsid' => 'DWC',
       'title_field' => array('DarwinRecordSet', 'occurrence', 'occurrenceid'),
       'transform' => 'dwcclassoccurrence2dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
       'template' => FALSE,
     ),
     'islandora_livingresearchlab_protocol_dwc_form' => array(
-      'content_model' => 'islandora:livingresearchlab_protocolCModel',
+      'content_model' => 'islandora:sp_pdf',
       'form_name' => 'DSU Protocol DwC',
       'dsid' => 'DWC',
       'title_field' => array('DarwinRecordSet', 'occurrence', 'occurrenceid'),
       'transform' => 'dwcclassoccurrence2dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
       'template' => FALSE,
     ),
     'islandora_livingresearchlab_publication_dwc_form' => array(
@@ -266,6 +254,7 @@ function islandora_livingresearchlab_islandora_content_model_forms_form_associat
       'dsid' => 'MODS',
       'title_field' => array('titleInfo', 'title'),
       'transform' => 'mods_to_dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
       'template' => FALSE,
     ),
   );
@@ -281,17 +270,6 @@ function islandora_livingresearchlab_islandora_required_objects(IslandoraTuque $
 
 $module_path = drupal_get_path('module', 'islandora_livingresearchlab');
 
-/** BIRTH CModel */ 
-  $solution_pack_livingresearchlab_birth_content_model = $connection->repository->constructObject('islandora:livingresearchlab_birthCModel');
-  $solution_pack_livingresearchlab_birth_content_model->owner = 'fedoraAdmin';
-  $solution_pack_livingresearchlab_birth_content_model->label = 'Islandora Living Research Lab Birth Content Model';
-  $solution_pack_livingresearchlab_birth_content_model->models = 'fedora-system:ContentModel-3.0';
-  
-  $datastream = $solution_pack_livingresearchlab_birth_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
-  $datastream->label = 'DS-COMPOSITE-MODEL';
-  $datastream->mimetype = 'text/xml';
-  $datastream->setContentFromFile("$module_path/xml/islandora_livingresearchlab_birth_ds_composite_model.xml", FALSE);
-  $solution_pack_livingresearchlab_birth_content_model->ingestDatastream($datastream);
 
 /** Data Session CModel */ 
   $solution_pack_livingresearchlab_datasession_content_model = $connection->repository->constructObject('islandora:livingresearchlab_datasessionCModel');
@@ -330,51 +308,36 @@ $module_path = drupal_get_path('module', 'islandora_livingresearchlab');
   $solution_pack_livingresearchlab_mouse_content_model->ingestDatastream($datastream);
 
 
-/** Protocol CModel */ 
-  $solution_pack_livingresearchlab_protocol_content_model = $connection->repository->constructObject('islandora:livingresearchlab_protocolCModel');
-  $solution_pack_livingresearchlab_protocol_content_model->owner = 'fedoraAdmin';
-  $solution_pack_livingresearchlab_protocol_content_model->label = 'Islandora Living Research Lab Protocol Content Model';
-  $solution_pack_livingresearchlab_protocol_content_model->models = 'fedora-system:ContentModel-3.0';
+
+
+
+// // * Protocol CModel  
+//   $solution_pack_livingresearchlab_protocol_content_model = $connection->repository->constructObject('islandora:livingresearchlab_protocolCModel');
+//   $solution_pack_livingresearchlab_protocol_content_model->owner = 'fedoraAdmin';
+//   $solution_pack_livingresearchlab_protocol_content_model->label = 'Islandora Living Research Lab Protocol Content Model';
+//   $solution_pack_livingresearchlab_protocol_content_model->models = 'fedora-system:ContentModel-3.0';
   
-  $datastream = $solution_pack_livingresearchlab_protocol_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
-  $datastream->label = 'DS-COMPOSITE-MODEL';
-  $datastream->mimetype = 'text/xml';
-  $datastream->setContentFromFile("$module_path/xml/islandora_livingresearchlab_protocol_ds_composite_model.xml", FALSE);
-  $solution_pack_livingresearchlab_protocol_content_model->ingestDatastream($datastream);
+//   $datastream = $solution_pack_livingresearchlab_protocol_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+//   $datastream->label = 'DS-COMPOSITE-MODEL';
+//   $datastream->mimetype = 'text/xml';
+//   $datastream->setContentFromFile("$module_path/xml/islandora_livingresearchlab_protocol_ds_composite_model.xml", FALSE);
+//   $solution_pack_livingresearchlab_protocol_content_model->ingestDatastream($datastream);
 
 
-/** Publication CModel */ 
-  $solution_pack_livingresearchlab_publication_content_model = $connection->repository->constructObject('islandora:livingresearchlab_publicationCModel');
-  $solution_pack_livingresearchlab_publication_content_model->owner = 'fedoraAdmin';
-  $solution_pack_livingresearchlab_publication_content_model->label = 'Islandora Living Research Lab Publication Content Model';
-  $solution_pack_livingresearchlab_publication_content_model->models = 'fedora-system:ContentModel-3.0';
+// // * Publication CModel  
+//   $solution_pack_livingresearchlab_publication_content_model = $connection->repository->constructObject('islandora:livingresearchlab_publicationCModel');
+//   $solution_pack_livingresearchlab_publication_content_model->owner = 'fedoraAdmin';
+//   $solution_pack_livingresearchlab_publication_content_model->label = 'Islandora Living Research Lab Publication Content Model';
+//   $solution_pack_livingresearchlab_publication_content_model->models = 'fedora-system:ContentModel-3.0';
   
-  $datastream = $solution_pack_livingresearchlab_publication_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
-  $datastream->label = 'DS-COMPOSITE-MODEL';
-  $datastream->mimetype = 'text/xml';
-  $datastream->setContentFromFile("$module_path/xml/islandora_livingresearchlab_publication_ds_composite_model.xml", FALSE);
-  $solution_pack_livingresearchlab_publication_content_model->ingestDatastream($datastream);
+//   $datastream = $solution_pack_livingresearchlab_publication_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+//   $datastream->label = 'DS-COMPOSITE-MODEL';
+//   $datastream->mimetype = 'text/xml';
+//   $datastream->setContentFromFile("$module_path/xml/islandora_livingresearchlab_publication_ds_composite_model.xml", FALSE);
+//   $solution_pack_livingresearchlab_publication_content_model->ingestDatastream($datastream);
 
 
 
-/** BIRTHS root collection */  
-  $births_collection = $connection->repository->constructObject('islandora:births_collection');
-  $births_collection->owner = 'fedoraAdmin';
-  $births_collection->label = 'Births';
-  $births_collection->models = 'islandora:collectionCModel';
-  $births_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
-
-  $datastream = $births_collection->constructDatastream('COLLECTION_POLICY', 'X');
-  $datastream->label = 'Collection policy';
-  $datastream->mimetype = 'text/xml';
-  $datastream->setContentFromFile("$module_path/xml/collection_policy/islandora_livingresearchlab_births_collection_policy.xml", FALSE);
-  $births_collection->ingestDatastream($datastream);
-
-  $datastream = $births_collection->constructDatastream('TN', 'M');
-  $datastream->label = 'Thumbnail';
-  $datastream->mimetype = 'image/png';
-  $datastream->setContentFromFile("$module_path/images/births.png", FALSE);
-  $births_collection->ingestDatastream($datastream);
 
 
 /** DATASESSION root collection */  
@@ -477,13 +440,11 @@ $module_path = drupal_get_path('module', 'islandora_livingresearchlab');
     'islandora_livingresearchlab' => array(
       'title' => 'DSU Living Research Lab Solution Pack',
       'objects' => array(
-        $solution_pack_livingresearchlab_birth_content_model,
         $solution_pack_livingresearchlab_datasession_content_model,
         $solution_pack_livingresearchlab_experiment_content_model,
         $solution_pack_livingresearchlab_mouse_content_model,
         $solution_pack_livingresearchlab_protocol_content_model,
         $solution_pack_livingresearchlab_publication_content_model,
-        $births_collection,
         $datasessions_collection,
         $experiments_collection,
         $mice_collection,

@@ -33,7 +33,7 @@
       </actions>
     </properties>
     <children>
-      <element name="DarwinRecordSet">
+      <element name="dwc_fields_experiment">
         <properties>
           <type>fieldset</type>
           <access>TRUE</access>
@@ -59,7 +59,7 @@
               <multiple>FALSE</multiple>
               <required>FALSE</required>
               <resizable>FALSE</resizable>
-              <title>Experiment Identifier</title>
+              <title>Experiment ID</title>
               <tree>TRUE</tree>
               <actions>
                 <create>
@@ -236,6 +236,44 @@
                 <children/>
               </element>
             </children>
+          </element>
+          <element name="ResourceRelationship">
+            <properties>
+              <type>textfield</type>
+              <access>TRUE</access>
+              <collapsed>FALSE</collapsed>
+              <collapsible>FALSE</collapsible>
+              <disabled>FALSE</disabled>
+              <executes_submit_callback>FALSE</executes_submit_callback>
+              <multiple>FALSE</multiple>
+              <required>TRUE</required>
+              <resizable>FALSE</resizable>
+              <title>Affiliated Protocol</title>
+              <tree>TRUE</tree>
+              <actions>
+                <create>
+                  <path>self::node()</path>
+                  <context>parent</context>
+                  <schema/>
+                  <type>xml</type>
+                  <prefix>NULL</prefix>
+                  <value>&lt;dwc:ResourceRelationship&gt;&lt;dwc:relatedResourceID&gt;%value%&lt;/dwc:relatedResourceID&gt;&lt;dwc:relationshipOfResource&gt;isPartOfProtocol&lt;/dwc:relationshipOfResource&gt;&lt;/dwc:ResourceRelationship&gt;</value>
+                </create>
+                <read>
+                  <path>dwc:ResourceRelationship/dwc:relatedResourceID</path>
+                  <context>parent</context>
+                </read>
+                <update>
+                  <path>self::node()</path>
+                  <context>self</context>
+                </update>
+                <delete>
+                  <path>self::node()</path>
+                  <context>self</context>
+                </delete>
+              </actions>
+            </properties>
+            <children/>
           </element>
         </children>
       </element>
