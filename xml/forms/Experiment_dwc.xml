@@ -257,7 +257,7 @@
                   <schema/>
                   <type>xml</type>
                   <prefix>NULL</prefix>
-                  <value>&lt;dwc:ResourceRelationship&gt;&lt;dwc:relatedResourceID&gt;%value%&lt;/dwc:relatedResourceID&gt;&lt;dwc:relationshipOfResource&gt;isPartOfProtocol&lt;/dwc:relationshipOfResource&gt;&lt;/dwc:ResourceRelationship&gt;</value>
+                  <value>&lt;dwc:ResourceRelationship&gt;&lt;dwc:relatedResourceID&gt;%value%&lt;/dwc:relatedResourceID&gt;&lt;dwc:relationshipOfResource&gt;isUnderProtocol&lt;/dwc:relationshipOfResource&gt;&lt;/dwc:ResourceRelationship&gt;</value>
                 </create>
                 <read>
                   <path>dwc:ResourceRelationship/dwc:relatedResourceID</path>
