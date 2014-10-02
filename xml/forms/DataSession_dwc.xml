@@ -70,7 +70,7 @@
                   <value>dwc:Occurrence</value>
                 </create>
                 <read>
-                  <path>/dwr:DarwinRecordSet/dwc:Occurrence</path>
+                  <path>/dwr:DarwinRecordSet/dwc:Occurrence[1]</path>
                   <context>document</context>
                 </read>
                 <update>
@@ -184,7 +184,7 @@
                   <value>&lt;dwc:ResourceRelationship&gt;&lt;dwc:relatedResourceID&gt;%value%&lt;/dwc:relatedResourceID&gt;&lt;dwc:relationshipOfResource&gt;isPartOfExperiment&lt;/dwc:relationshipOfResource&gt;&lt;/dwc:ResourceRelationship&gt;</value>
                 </create>
                 <read>
-                  <path>dwc:ResourceRelationship/dwc:relatedResourceID</path>
+                  <path>/dwr:DarwinRecordSet/dwc:ResourceRelationship/dwc:relatedResourceID</path>
                   <context>parent</context>
                 </read>
                 <update>
@@ -334,7 +334,7 @@
                       <value>dwc:recordedBy</value>
                     </create>
                     <read>
-                      <path>dwc:recordedBy</path>
+                      <path>/dwr:DarwinRecordSet/dwc:Event/dwc:recordedBy</path>
                       <context>parent</context>
                     </read>
                     <update>
@@ -363,28 +363,6 @@
               <required>FALSE</required>
               <resizable>FALSE</resizable>
               <tree>TRUE</tree>
-              <actions>
-                <create>
-                  <path>/dwr:DarwinRecordSet</path>
-                  <context>document</context>
-                  <schema/>
-                  <type>element</type>
-                  <prefix>dwc</prefix>
-                  <value>dwc:Occurrence</value>
-                </create>
-                <read>
-                  <path>/dwr:DarwinRecordSet/dwc:Occurrence</path>
-                  <context>document</context>
-                </read>
-                <update>
-                  <path>self::node()</path>
-                  <context>self</context>
-                </update>
-                <delete>
-                  <path>self::node()</path>
-                  <context>self</context>
-                </delete>
-              </actions>
             </properties>
             <children>
               <element name="occurrenceremarks">
@@ -402,7 +380,7 @@
                   <tree>TRUE</tree>
                   <actions>
                     <create>
-                      <path>/dwr:DarwinRecordSet/dwc:Occurrence[2]</path>
+                      <path>/dwr:DarwinRecordSet/dwc:Occurrence[1]</path>
                       <context>document</context>
                       <schema/>
                       <type>element</type>
@@ -410,7 +388,7 @@
                       <value>dwc:occurrenceRemarks</value>
                     </create>
                     <read>
-                      <path>/dwr:DarwinRecordSet/dwc:Occurrence[2]/dwc:occurrenceRemarks[1]</path>
+                      <path>/dwr:DarwinRecordSet/dwc:Occurrence[1]/dwc:occurrenceRemarks[1]</path>
                       <context>document</context>
                     </read>
                     <update>
@@ -486,7 +464,7 @@
                       </actions>
                     </properties>
                     <children>
-                      <element name="measurementID">
+                      <element name="measurementValue">
                         <properties>
                           <type>textfield</type>
                           <access>TRUE</access>
@@ -506,10 +484,10 @@
                               <schema/>
                               <type>element</type>
                               <prefix>dwc</prefix>
-                              <value>dwc:measurementID</value>
+                              <value>dwc:measurementValue</value>
                             </create>
                             <read>
-                              <path>dwc:measurementID</path>
+                              <path>dwc:measurementValue</path>
                               <context>parent</context>
                             </read>
                             <update>
@@ -548,6 +526,82 @@
                             </create>
                             <read>
                               <path>dwc:measurementRemarks</path>
+                              <context>parent</context>
+                            </read>
+                            <update>
+                              <path>self::node()</path>
+                              <context>self</context>
+                            </update>
+                            <delete>
+                              <path>self::node()</path>
+                              <context>self</context>
+                            </delete>
+                          </actions>
+                        </properties>
+                        <children/>
+                      </element>
+                      <element name="measurementID">
+                        <properties>
+                          <type>textfield</type>
+                          <access>TRUE</access>
+                          <collapsed>FALSE</collapsed>
+                          <collapsible>FALSE</collapsible>
+                          <disabled>FALSE</disabled>
+                          <executes_submit_callback>FALSE</executes_submit_callback>
+                          <multiple>FALSE</multiple>
+                          <required>FALSE</required>
+                          <resizable>FALSE</resizable>
+                          <title>Mouse Identifier</title>
+                          <tree>TRUE</tree>
+                          <actions>
+                            <create>
+                              <path>self::node()</path>
+                              <context>parent</context>
+                              <schema/>
+                              <type>element</type>
+                              <prefix>dwc</prefix>
+                              <value>dwc:measurementID</value>
+                            </create>
+                            <read>
+                              <path>dwc:measurementID</path>
+                              <context>parent</context>
+                            </read>
+                            <update>
+                              <path>self::node()</path>
+                              <context>self</context>
+                            </update>
+                            <delete>
+                              <path>self::node()</path>
+                              <context>self</context>
+                            </delete>
+                          </actions>
+                        </properties>
+                        <children/>
+                      </element>
+                      <element name="measurementType">
+                        <properties>
+                          <type>hidden</type>
+                          <access>TRUE</access>
+                          <collapsed>FALSE</collapsed>
+                          <collapsible>FALSE</collapsible>
+                          <disabled>FALSE</disabled>
+                          <executes_submit_callback>FALSE</executes_submit_callback>
+                          <multiple>FALSE</multiple>
+                          <required>FALSE</required>
+                          <resizable>FALSE</resizable>
+                          <title>Filename</title>
+                          <tree>TRUE</tree>
+                          <actions>
+                            <create>
+                              <path>self::node()</path>
+                              <context>parent</context>
+                              <schema/>
+                              <type>xml</type>
+                              <prefix>NULL</prefix>
+                              <value>&lt;dwc:measurementType&gt;isMeasurementOfMouse&lt;/dwc:measurementType&gt;</value>
+                            </create>
+                            <read>
+                              <path>dwc:measurementType</path>
                               <context>parent</context>
                             </read>
                             <update>
