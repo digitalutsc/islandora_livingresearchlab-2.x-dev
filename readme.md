@@ -16,8 +16,8 @@ Install as you would any other drupal module.
 ## Troubleshooting/Issues
 This is a beta test.  The module is not meant to be used in a production environment.
 Needs: 
--Add self-transform xslt
--protocol ingest to pdf, publication ingest to pdf
+-Self-transform xslt may need modification
+-themes, collection policy, admin page need to be customized
 
 ## Maintainers
 
