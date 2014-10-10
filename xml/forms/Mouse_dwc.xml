@@ -583,7 +583,7 @@
               <tree>TRUE</tree>
             </properties>
             <children>
-              <element name="tabpanel">
+              <element name="tabpaneldctermslocation1recursive">
                 <properties>
                   <type>tabpanel</type>
                   <access>TRUE</access>
@@ -595,19 +595,43 @@
                   <required>FALSE</required>
                   <resizable>FALSE</resizable>
                   <tree>TRUE</tree>
+                  <actions>
+                    <create>
+                      <path>self::node()</path>
+                      <context>parent</context>
+                      <schema/>
+                      <type>element</type>
+                      <prefix>dcterms</prefix>
+                      <value>dcterms:Location</value>
+                    </create>
+                    <read>
+                      <path>dcterms:Location</path>
+                      <context>parent</context>
+                    </read>
+                    <update>
+                      <path>self::node()</path>
+                      <context>self</context>
+                    </update>
+                    <delete>
+                      <path>self::node()</path>
+                      <context>self</context>
+                    </delete>
+                  </actions>
                 </properties>
                 <children>
-                  <element name="dctermslocation1recursive">
+                  <element name="locationid1">
                     <properties>
-                      <type>markup</type>
+                      <type>textfield</type>
                       <access>TRUE</access>
                       <collapsed>FALSE</collapsed>
                       <collapsible>FALSE</collapsible>
                       <disabled>FALSE</disabled>
                       <executes_submit_callback>FALSE</executes_submit_callback>
+                      <maxlength>4</maxlength>
                       <multiple>FALSE</multiple>
                       <required>FALSE</required>
                       <resizable>FALSE</resizable>
+                      <title>Cage ID</title>
                       <tree>TRUE</tree>
                       <actions>
                         <create>
@@ -615,11 +639,11 @@
                           <context>parent</context>
                           <schema/>
                           <type>element</type>
-                          <prefix>dcterms</prefix>
-                          <value>dcterms:Location</value>
+                          <prefix>dwc</prefix>
+                          <value>dwc:locationID</value>
                         </create>
                         <read>
-                          <path>dcterms:Location</path>
+                          <path>dwc:locationID</path>
                           <context>parent</context>
                         </read>
                         <update>
@@ -632,131 +656,91 @@
                         </delete>
                       </actions>
                     </properties>
-                    <children>
-                      <element name="locationid1">
-                        <properties>
-                          <type>textfield</type>
-                          <access>TRUE</access>
-                          <collapsed>FALSE</collapsed>
-                          <collapsible>FALSE</collapsible>
-                          <disabled>FALSE</disabled>
-                          <executes_submit_callback>FALSE</executes_submit_callback>
-                          <maxlength>4</maxlength>
-                          <multiple>FALSE</multiple>
-                          <required>FALSE</required>
-                          <resizable>FALSE</resizable>
-                          <title>Cage ID</title>
-                          <tree>TRUE</tree>
-                          <actions>
-                            <create>
-                              <path>self::node()</path>
-                              <context>parent</context>
-                              <schema/>
-                              <type>element</type>
-                              <prefix>dwc</prefix>
-                              <value>dwc:locationID</value>
-                            </create>
-                            <read>
-                              <path>dwc:locationID</path>
-                              <context>parent</context>
-                            </read>
-                            <update>
-                              <path>self::node()</path>
-                              <context>self</context>
-                            </update>
-                            <delete>
-                              <path>self::node()</path>
-                              <context>self</context>
-                            </delete>
-                          </actions>
-                        </properties>
-                        <children/>
-                      </element>
-                      <element name="locality1">
-                        <properties>
-                          <type>select</type>
-                          <access>TRUE</access>
-                          <collapsed>FALSE</collapsed>
-                          <collapsible>FALSE</collapsible>
-                          <disabled>FALSE</disabled>
-                          <executes_submit_callback>FALSE</executes_submit_callback>
-                          <maxlength>20</maxlength>
-                          <multiple>FALSE</multiple>
-                          <options>
-                            <index key="Cage born">Cage born</index>
-                            <index key="Living cage">Living cage</index>
-                            <index key="Breeding cage">Breeding cage</index>
-                          </options>
-                          <required>FALSE</required>
-                          <resizable>FALSE</resizable>
-                          <title>Cage Status</title>
-                          <tree>TRUE</tree>
-                          <actions>
-                            <create>
-                              <path>self::node()</path>
-                              <context>parent</context>
-                              <schema/>
-                              <type>element</type>
-                              <prefix>dwc</prefix>
-                              <value>dwc:locality</value>
-                            </create>
-                            <read>
-                              <path>dwc:locality</path>
-                              <context>parent</context>
-                            </read>
-                            <update>
-                              <path>self::node()</path>
-                              <context>self</context>
-                            </update>
-                            <delete>
-                              <path>self::node()</path>
-                              <context>self</context>
-                            </delete>
-                          </actions>
-                        </properties>
-                        <children/>
-                      </element>
-                      <element name="locationremarks1">
-                        <properties>
-                          <type>datepicker</type>
-                          <access>TRUE</access>
-                          <collapsed>FALSE</collapsed>
-                          <collapsible>FALSE</collapsible>
-                          <description>yyy-mm-dd</description>
-                          <disabled>FALSE</disabled>
-                          <executes_submit_callback>FALSE</executes_submit_callback>
-                          <maxlength>20</maxlength>
-                          <multiple>FALSE</multiple>
-                          <required>FALSE</required>
-                          <resizable>FALSE</resizable>
-                          <title>Date of Entry</title>
-                          <tree>TRUE</tree>
-                          <actions>
-                            <create>
-                              <path>self::node()</path>
-                              <context>parent</context>
-                              <schema/>
-                              <type>element</type>
-                              <prefix>dwc</prefix>
-                              <value>dwc:locationRemarks</value>
-                            </create>
-                            <read>
-                              <path>dwc:locationRemarks</path>
-                              <context>parent</context>
-                            </read>
-                            <update>
-                              <path>self::node()</path>
-                              <context>self</context>
-                            </update>
-                            <delete>
-                              <path>self::node()</path>
-                              <context>self</context>
-                            </delete>
-                          </actions>
-                        </properties>
-                        <children/>
-                      </element>
-                    </children>
+                    <children/>
+                  </element>
+                  <element name="locality1">
+                    <properties>
+                      <type>select</type>
+                      <access>TRUE</access>
+                      <collapsed>FALSE</collapsed>
+                      <collapsible>FALSE</collapsible>
+                      <disabled>FALSE</disabled>
+                      <executes_submit_callback>FALSE</executes_submit_callback>
+                      <maxlength>20</maxlength>
+                      <multiple>FALSE</multiple>
+                      <options>
+                        <index key="Cage born">Cage born</index>
+                        <index key="Living cage">Living cage</index>
+                        <index key="Breeding cage">Breeding cage</index>
+                      </options>
+                      <required>FALSE</required>
+                      <resizable>FALSE</resizable>
+                      <title>Cage Status</title>
+                      <tree>TRUE</tree>
+                      <actions>
+                        <create>
+                          <path>self::node()</path>
+                          <context>parent</context>
+                          <schema/>
+                          <type>element</type>
+                          <prefix>dwc</prefix>
+                          <value>dwc:locality</value>
+                        </create>
+                        <read>
+                          <path>dwc:locality</path>
+                          <context>parent</context>
+                        </read>
+                        <update>
+                          <path>self::node()</path>
+                          <context>self</context>
+                        </update>
+                        <delete>
+                          <path>self::node()</path>
+                          <context>self</context>
+                        </delete>
+                      </actions>
+                    </properties>
+                    <children/>
+                  </element>
+                  <element name="locationremarks1">
+                    <properties>
+                      <type>datepicker</type>
+                      <access>TRUE</access>
+                      <collapsed>FALSE</collapsed>
+                      <collapsible>FALSE</collapsible>
+                      <description>yyy-mm-dd</description>
+                      <disabled>FALSE</disabled>
+                      <executes_submit_callback>FALSE</executes_submit_callback>
+                      <maxlength>20</maxlength>
+                      <multiple>FALSE</multiple>
+                      <required>FALSE</required>
+                      <resizable>FALSE</resizable>
+                      <title>Date of Entry</title>
+                      <tree>TRUE</tree>
+                      <actions>
+                        <create>
+                          <path>self::node()</path>
+                          <context>parent</context>
+                          <schema/>
+                          <type>element</type>
+                          <prefix>dwc</prefix>
+                          <value>dwc:locationRemarks</value>
+                        </create>
+                        <read>
+                          <path>dwc:locationRemarks</path>
+                          <context>parent</context>
+                        </read>
+                        <update>
+                          <path>self::node()</path>
+                          <context>self</context>
+                        </update>
+                        <delete>
+                          <path>self::node()</path>
+                          <context>self</context>
+                        </delete>
+                      </actions>
+                    </properties>
+                    <children/>
                   </element>
                 </children>
               </element>
